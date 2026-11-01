@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  color-scheme: dark;
+  --ink: #030407;
+  --cobalt: #1558c9;
+  --lime: #d4ff24;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-ink text-fog font-sans antialiased;
+  font-feature-settings: "ss02", "tnum";
+}
+
+::selection {
+  background: rgba(21, 88, 201, 0.55);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Scrollbars that belong to a dark tool */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-line bg-card/80 backdrop-blur-sm;
+  }
+  .panel-flat {
+    @apply rounded-lg border border-line bg-surface;
+  }
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-fog placeholder:text-muted/70 transition-colors focus:border-cobalt focus:outline-none;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-muted;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-muted;
+  }
+  .table-head th {
+    @apply sticky top-0 z-10 bg-surface px-3 py-2 text-left text-xs font-medium text-muted;
+  }
+  .table-row td {
+    @apply border-t border-line px-3 py-2 align-top;
+  }
+}
+
+/* Animated border used sparingly: the live terminal and the active trace card. */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle), transparent 0 70%, rgba(21, 88, 201, 0.9) 80%, rgba(212, 255, 36, 0.8) 88%, transparent 96%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinBorder 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes spinBorder {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.grid-bg {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* React Flow dark adjustments */
+.react-flow__attribution {
+  display: none;
+}
+.react-flow__controls button {
+  background: #101725 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  fill: #f5f7fa !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+.react-flow.dark {
+  --xy-background-color: transparent;
+  --xy-node-background-color: transparent;
+  --xy-edge-label-background-color: #030407;
+}
+.react-flow__node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}

@@ -1,0 +1,5 @@
+SyscallScope sample file.
+Every line you see printed was read by the read() system call,
+copied into a user-space buffer, and handed back to the kernel
+through write() so it could reach your terminal.
+User mode asks; kernel mode does.
