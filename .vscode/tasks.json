@@ -4,7 +4,7 @@
     {
       "label": "Start Backend (FastAPI)",
       "type": "shell",
-      "command": ".\\backend\\.venv\\Scripts\\python.exe -m uvicorn main:app --reload --port 8000 --host 127.0.0.1",
+      "command": ".\\backend\\.venv\\Scripts\\python.exe -m uvicorn main:app --reload --port 8001 --host 127.0.0.1",
       "options": {
         "cwd": "${workspaceFolder}/backend"
       },
